@@ -3,7 +3,7 @@
 > A decentralized election voting application that enables secure, transparent, and tamper-resistant digital elections using Ethereum smart contracts.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![GitHub issues](https://img.shields.io/github/issues-raw/yourusername/yourrepo)
+![GitHub issues](https://img.shields.io/github/issues-raw/mtahanaeem/Election)
 
 ## Table of Contents
 
