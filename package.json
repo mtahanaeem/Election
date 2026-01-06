@@ -1,0 +1,29 @@
+{
+  "name": "election-dapp",
+  "version": "1.0.0",
+  "description": "Ethereum blockchain voting dapp with Truffle",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "test": "truffle test",
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --reset"
+  },
+  "keywords": [
+    "ethereum",
+    "blockchain",
+    "voting",
+    "dapp",
+    "truffle",
+    "solidity"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "lite-server": "^2.6.1",
+    "live-server": "^1.2.2"
+  }
+}

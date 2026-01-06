@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pakistan General Election 2025 | Decentralized Voting</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+      :root {
+        --primary-green: #115e2e;
+        --secondary-green: #004d25;
+        --accent-gold: #fbbf24;
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --text-dark: #1f2937;
+      }
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+        background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);
+        min-height: 100vh;
+        color: var(--text-dark);
+        padding: 40px 0;
+        overflow-x: hidden;
+      }
+
+      /* Animated Background Shapes */
+      body::before {
+        content: '';
+        position: fixed;
+        top: -10%;
+        left: -10%;
+        width: 50vw;
+        height: 50vw;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        border-radius: 50%;
+        animation: float 20s infinite linear;
+        z-index: -1;
+      }
+
+      @keyframes float {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(20px, 40px) rotate(180deg); }
+        100% { transform: translate(0, 0) rotate(360deg); }
+      }
+
+      .main-card {
+        background: var(--glass-bg);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.4);
+        max-width: 750px;
+        margin: 0 auto;
+        animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Header Section */
+      .card-header {
+        background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Flag_of_Pakistan.svg/2560px-Flag_of_Pakistan.svg.png') center/cover no-repeat;
+        position: relative;
+        padding: 50px 30px;
+        text-align: center;
+        color: white;
+      }
+
+      .card-header::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(6, 78, 59, 0.85), rgba(6, 78, 59, 0.95));
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 32px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+        text-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      }
+
+      .badge-live {
+        background: #ef4444;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-flex;
+        align-items: center;
+        margin-top: 15px;
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        animation: pulse 2s infinite;
+      }
+
+      .badge-live::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+      }
+
+      /* Content Section */
+      .card-body {
+        padding: 40px;
+      }
+
+      /* Loader */
+      .loader-container {
+        padding: 50px 0;
+        text-align: center;
+      }
+      
+      .spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid #e5e7eb;
+        border-top-color: var(--primary-green);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      /* Table Styles */
+      .table-responsive {
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+        border: 1px solid #e5e7eb;
+      }
+
+      .table {
+        margin-bottom: 0;
+      }
+
+      .table thead th {
+        background: #f3f4f6;
+        color: #4b5563;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #e5e7eb;
+        padding: 15px 20px;
+      }
+
+      .table tbody td {
+        padding: 15px 20px;
+        vertical-align: middle;
+        font-size: 15px;
+        font-weight: 600;
+        color: #374151;
+        border-top: 1px solid #f3f4f6;
+      }
+
+      .table tbody tr:hover {
+        background-color: #f9fafb;
+      }
+
+      .candidate-name {
+        display: flex;
+        align-items: center;
+      }
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+        background: #d1fae5;
+        color: var(--primary-green);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 14px;
+      }
+
+      /* Voting Section */
+      .voting-area {
+        background: #f8fafc;
+        padding: 30px;
+        border-radius: 16px;
+        text-align: center;
+        border: 1px dashed #cbd5e1;
+      }
+
+      .voting-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 20px;
+      }
+
+      .custom-select {
+        height: 50px;
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+        padding: 0 20px;
+        font-size: 16px;
+        box-shadow: none;
+        transition: all 0.3s;
+        margin-bottom: 20px;
+      }
+
+      .custom-select:focus {
+        border-color: var(--primary-green);
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      }
+
+      .btn-vote {
+        background: linear-gradient(135deg, var(--primary-green) 0%, #059669 100%);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        width: 100%;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .btn-vote:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(5, 150, 105, 0.4);
+        color: white;
+      }
+
+      /* Success Message */
+      .vote-success {
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        color: #065f46;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+      .vote-success i {
+        font-size: 32px;
+        margin-bottom: 10px;
+        display: block;
+        color: #10b981;
+      }
+
+      /* Footer */
+      .account-info {
+        margin-top: 30px;
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        font-family: monospace;
+        background: rgba(0,0,0,0.03);
+        padding: 8px 15px;
+        border-radius: 30px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="main-card">
+        
+        <!-- Header -->
+        <div class="card-header">
+          <div class="header-content">
+            <h1>Pakistan Election 2025</h1>
+            <div class="badge-live">Live Voting Active</div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          
+          <!-- Loader -->
+          <div id="loader" class="loader-container">
+            <div class="spinner"></div>
+            <p style="color: #6b7280; font-weight: 600;">Connecting to Blockchain...</p>
+          </div>
+
+          <!-- Content -->
+          <div id="content" style="display: none;">
+            
+            <!-- Table -->
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th width="10%">Rank</th>
+                    <th width="60%">Candidate Name</th>
+                    <th width="30%" class="text-center">Total Votes</th>
+                  </tr>
+                </thead>
+                <tbody id="candidatesResults">
+                  <!-- JS injects rows here -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Voting Form -->
+            <div class="voting-area">
+              <form onSubmit="App.castVote(); return false;">
+                <h4 class="voting-title">Cast Your Ballot Securely</h4>
+                <div class="form-group">
+                  <select class="form-control custom-select" id="candidatesSelect">
+                    <!-- JS injects options here -->
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-vote">
+                  Confirm Vote <i class="fas fa-check-circle" style="margin-left: 8px;"></i>
+                </button>
+              </form>
+              
+              <div id="votedMessage" style="display:none;" class="vote-success">
+                <i class="fas fa-vote-yea"></i>
+                <strong>Vote Cast Successfully!</strong><br>
+                Thank you for participating in the digital democracy.
+              </div>
+            </div>
+
+            <div class="text-center">
+              <div id="accountAddress" class="account-info"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@0.20.6/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/truffle-contract@3.0.6/dist/truffle-contract.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- UI Helper for Avatars -->
+    <script>
+      // Add icons to rows after they load
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes.length) {
+            $('#candidatesResults tr').each(function(index) {
+              const nameCell = $(this).find('td:nth-child(2)');
+              if (nameCell.find('.avatar').length === 0) {
+                const name = nameCell.text();
+                nameCell.html(`<div class="candidate-name"><div class="avatar"><i class="fas fa-user"></i></div>${name}</div>`);
+                $(this).find('td:nth-child(3)').addClass('text-center').css('font-weight', 'bold');
+              }
+            });
+          }
+        });
+      });
+      observer.observe(document.getElementById('candidatesResults'), { childList: true });
+    </script>
+
+  </body>
+</html>
+
